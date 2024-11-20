@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Questor.API", "Questor.API.csproj", "{8386C6B7-A38C-41C6-BCCD-18031A44583A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Questor.Infra", "..\Questor.Infra\Questor.Infra.csproj", "{0C5CE854-BDBF-426F-A748-4070CE850A8D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8C94A4B2-F7B5-4D0C-B86D-75348D3EFDFD} = {8C94A4B2-F7B5-4D0C-B86D-75348D3EFDFD}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Questor.Domain", "..\Questor.Domain\Questor.Domain.csproj", "{8C94A4B2-F7B5-4D0C-B86D-75348D3EFDFD}"
 EndProject
