@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Questor.Domain.Dtos;
 using Questor.Domain.Entities;
 using Questor.Infra.Interfaces;
@@ -10,25 +11,18 @@ namespace Questor.API.Controllers
     public class BoletoController : ControllerBase
     {
         private readonly IBoletoService _service;
+        private readonly IMapper _mapper;
 
-        public BoletoController(IBoletoService service)
+        public BoletoController(IBoletoService service, IMapper mapper)
         {
             _service = service;
+            _mapper = mapper;
         }
 
         [HttpPost]
-        public async Task<ActionResult<Banco>> Create([FromBody] BoletoDto dto)
+        public async Task<ActionResult<Boleto>> Create([FromBody] BoletoDto dto)
         {
-            var boleto = new Boleto
-            {
-                Nome = dto.Nome,
-                CPF = dto.CPF,
-                NomeBeneficiario = dto.NomeBeneficiario,
-                CPFBeneficiario = dto.CPFBeneficiario,
-                Valor = dto.Valor,
-                DataVencimento = dto.DataVencimento,
-                BancoId = dto.BancoId
-            };
+            var boleto = _mapper.Map<Boleto>(dto);
 
             await _service.Create(boleto);
             return Ok(boleto);
@@ -39,11 +33,13 @@ namespace Questor.API.Controllers
         {
             try
             {
+                // Busca o boleto pelo serviço
                 var boleto = await _service.GetById(id);
 
                 if (boleto != null)
-                {
-                    return Ok(boleto);
+                {                    
+                    var boletoDTO = _mapper.Map<BoletoDto>(boleto);
+                    return Ok(boletoDTO);
                 }
                 else
                 {

@@ -1,8 +1,10 @@
 using Questor.Infra.Context;
 using Microsoft.EntityFrameworkCore;
 using Questor.API.Configs;
+using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 // Add services to the container.
 
@@ -31,6 +33,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

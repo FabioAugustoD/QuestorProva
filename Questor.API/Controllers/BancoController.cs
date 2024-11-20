@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Questor.Domain.Dtos;
 using Questor.Domain.Entities;
 using Questor.Infra.Interfaces;
@@ -10,32 +11,28 @@ namespace Questor.API.Controllers
     public class BancoController : ControllerBase
     {
         private readonly IBancoService _service;
+        private readonly IMapper _mapper;
 
-        public BancoController(IBancoService service)
+        public BancoController(IBancoService service, IMapper mapper)
         {
             _service = service;
+            _mapper = mapper;
         }
 
         [HttpPost]
         public async Task<ActionResult<Banco>> Create([FromBody] BancoDto dto)
-        {
-            var banco = new Banco
-            {
-                Nome = dto.Nome,
-                Codigo = dto.Codigo,
-                Juros = dto.Juros                
-            };
-
-            await _service.Create(banco);
+        {            
+            var banco = _mapper.Map<Banco>(dto);           
+            await _service.Create(banco);            
             return Ok(banco);
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Banco>>> GetAll()
-        {
-            var result = await _service.GetAll();
-
-            return Ok(result);
+        public async Task<ActionResult<IEnumerable<BancoDto>>> GetAll()
+        {            
+            var bancos = await _service.GetAll();            
+            var bancoDTOs = _mapper.Map<IEnumerable<BancoDto>>(bancos);
+            return Ok(bancoDTOs);
         }
 
 
@@ -48,7 +45,8 @@ namespace Questor.API.Controllers
 
                 if (banco != null)
                 {
-                    return Ok(banco);
+                    var bancoDTO = _mapper.Map<BancoDto>(banco);
+                    return Ok(bancoDTO);
                 }
                 else
                 {
