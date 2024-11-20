@@ -18,8 +18,7 @@ namespace Questor.Infra.Maps
             builder.Property(x => x.NomeBeneficiario).HasColumnName("nome_beneficiario").IsRequired();
             builder.Property(x => x.CPFBeneficiario).HasColumnName("cpf_beneficiario").IsRequired();
             builder.Property(x => x.Valor).HasColumnName("valor").IsRequired();
-            builder.Property(x => x.DataVencimento).HasColumnName("vencimento").IsRequired();
-            builder.Property(x => x.IdBanco).HasColumnName("id_banco").IsRequired();
+            builder.Property(x => x.DataVencimento).HasColumnName("vencimento").IsRequired();            
         }
     }
 }

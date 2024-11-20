@@ -19,17 +19,16 @@ namespace Questor.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Banco>> Create([FromBody] BancoDto dto)
         {
-            var colaborador = new Banco
+            var banco = new Banco
             {
                 Nome = dto.Nome,
                 Codigo = dto.Codigo,
                 Juros = dto.Juros                
             };
 
-            await _service.Create(colaborador);
-            return Ok(colaborador);
+            await _service.Create(banco);
+            return Ok(banco);
         }
-
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Banco>>> GetAll()
@@ -37,6 +36,29 @@ namespace Questor.API.Controllers
             var result = await _service.GetAll();
 
             return Ok(result);
+        }
+
+
+        [HttpGet("{code}")]
+        public async Task<IActionResult> GetByCode(string code)
+        {
+            try
+            {
+                var banco = await _service.GetByCode(code);
+
+                if (banco != null)
+                {
+                    return Ok(banco);
+                }
+                else
+                {
+                    return NotFound($"Banco com o código {code} não encontrado");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro ao buscar o banco: {ex.Message}");
+            }
         }
     }
 }

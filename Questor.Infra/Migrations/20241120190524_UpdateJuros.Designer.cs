@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Questor.Infra.Context;
 
@@ -11,9 +12,10 @@ using Questor.Infra.Context;
 namespace Questor.Infra.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241120190524_UpdateJuros")]
+    partial class UpdateJuros
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,6 +77,10 @@ namespace Questor.Infra.Migrations
                     b.Property<DateTime>("DataVencimento")
                         .HasColumnType("datetime2")
                         .HasColumnName("vencimento");
+
+                    b.Property<int>("IdBanco")
+                        .HasColumnType("int")
+                        .HasColumnName("id_banco");
 
                     b.Property<string>("Nome")
                         .IsRequired()

@@ -15,8 +15,8 @@ namespace Questor.API.Configs
         {
             serviceProvider.AddScoped<IBancoRepository, BancoRepository>();
             serviceProvider.AddScoped<IBancoService, BancoService>();
-           //serviceProvider.AddScoped<IBoletoRepository, BoletoRepository>();
-           //serviceProvider.AddScoped<IBoletoService, BoletoService>();
+            serviceProvider.AddScoped<IBoletoRepository, BoletoRepository>();
+            serviceProvider.AddScoped<IBoletoService, BoletoService>();
         }
     }
 }
