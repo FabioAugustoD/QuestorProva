@@ -1,6 +1,6 @@
 using Questor.Infra.Context;
 using Microsoft.EntityFrameworkCore;
-using System;
+using Questor.API.Configs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +22,8 @@ builder.Services.AddDbContext<AppDbContext>((serviceProvider, options) =>
     var configuration = serviceProvider.GetRequiredService<IConfiguration>();
     options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
 });
+
+ServiceConfiguration.Register(builder.Services);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
