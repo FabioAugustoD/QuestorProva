@@ -11,6 +11,6 @@ namespace Questor.Domain.Entities
     {
         public string Nome {  get; set; }
         public string Codigo { get; set; }
-        public string Juros { get; set; }
+        public double Juros { get; set; }
     }
 }

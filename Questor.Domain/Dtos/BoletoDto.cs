@@ -4,7 +4,6 @@ namespace Questor.Domain.Dtos
 {
     public class BoletoDto
     {
-        public int Id { get; set; }
         public string Nome { get; set; }
         public string CPF { get; set; }
         public string NomeBeneficiario { get; set; }
