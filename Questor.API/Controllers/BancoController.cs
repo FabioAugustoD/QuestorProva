@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Questor.Domain.Dtos;
 using Questor.Domain.Entities;
@@ -20,6 +21,7 @@ namespace Questor.API.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<Banco>> Create([FromBody] BancoDto dto)
         {            
             var banco = _mapper.Map<Banco>(dto);           
@@ -28,6 +30,7 @@ namespace Questor.API.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<BancoDto>>> GetAll()
         {            
             var bancos = await _service.GetAll();            
@@ -37,6 +40,7 @@ namespace Questor.API.Controllers
 
 
         [HttpGet("{code}")]
+        [Authorize]
         public async Task<IActionResult> GetByCode(string code)
         {
             try

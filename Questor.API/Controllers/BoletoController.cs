@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Questor.Domain.Dtos;
 using Questor.Domain.Entities;
@@ -20,6 +21,7 @@ namespace Questor.API.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<Boleto>> Create([FromBody] BoletoDto dto)
         {
             var boleto = _mapper.Map<Boleto>(dto);
@@ -29,6 +31,7 @@ namespace Questor.API.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<IActionResult> GetById(int id)
         {
             try
